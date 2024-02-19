@@ -1,7 +1,6 @@
-import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { ROUTES } from './data/routes/routes.ts';
-import NotFound from './pages/NotFound.tsx';
+import { ROUTES } from './data/routes/routes';
+import NotFound from './pages/NotFound';
 
 
 const App =() => {
@@ -9,7 +8,7 @@ const App =() => {
   <BrowserRouter>
     <Routes>
     {ROUTES.map((e)=>(
-      <Route path={e.path} element={e.page}/>
+      <Route path={e.path} element={e.page} key={e.path}/>
     ))}
     <Route path='*' element={NotFound()}/>
     </Routes>
