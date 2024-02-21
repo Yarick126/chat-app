@@ -1,7 +1,7 @@
-import React from 'react';
+import { FC } from 'react';
 import { Link } from 'react-router-dom';
 
-function Home() {
+const  Home:FC = () => {
   return(
     <>
       <h1 className='text-center fs-1 mt-4'>Home</h1>

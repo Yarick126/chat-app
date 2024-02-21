@@ -2,7 +2,6 @@
   "compilerOptions": {
     // 👇️ set jsx to react-jsx
     "jsx": "react-jsx",
-
     "target": "es6",
     "lib": ["dom", "dom.iterable", "ES6"],
     "allowJs": true,

@@ -5,14 +5,14 @@ import Registration from "../../pages/Registration";
 export const ROUTES = [
   {
     path: '/',
-    page: Home()
+    page: Home
   },
   {
     path: '/login',
-    page: Login()
+    page: (Login)
   },
   {
     path: '/register',
-    page: Registration()
+    page: Registration
   }
 ] 

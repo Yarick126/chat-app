@@ -8,9 +8,9 @@ const App =() => {
   <BrowserRouter>
     <Routes>
     {ROUTES.map((e)=>(
-      <Route path={e.path} element={e.page} key={e.path}/>
+      <Route path={e.path} element={<e.page/>} key={e.path}/>
     ))}
-    <Route path='*' element={NotFound()}/>
+    <Route path='*' element={<NotFound/>}/>
     </Routes>
   </BrowserRouter>)
 }
