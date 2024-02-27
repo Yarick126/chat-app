@@ -1,3 +1,4 @@
+import Chat from "../../pages/Chat";
 import Home from "../../pages/Home";
 import Login from "../../pages/Login";
 import Registration from "../../pages/Registration";
@@ -9,10 +10,14 @@ export const ROUTES = [
   },
   {
     path: '/login',
-    page: (Login)
+    page: Login
   },
   {
     path: '/register',
     page: Registration
+  },
+  {
+    path: '/chat',
+    page: Chat
   }
 ] 
