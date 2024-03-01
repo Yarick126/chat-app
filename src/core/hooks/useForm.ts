@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useMemo, useState } from "react"
 import { LoginTypes } from "../types/login-types"
 
 export const useForm = (callback: any, initialState:LoginTypes) => {
@@ -20,9 +20,9 @@ export const useForm = (callback: any, initialState:LoginTypes) => {
     await callback()
   }
 
-  return {
+  return useMemo(()=>({
     onChange,
     onSubmit,
     userObject
-  }
+  }),[userObject])
 }

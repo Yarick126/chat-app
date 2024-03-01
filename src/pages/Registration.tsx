@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { RegisterTypes } from '../core/types/regiter-types';
 import { useMutation } from '@tanstack/react-query';
 import { registerUser } from '../core/api';
@@ -24,7 +24,6 @@ const Registration:FC = () => {
       }
     })
 
-  const navigate = useNavigate()
 
   const { mutate, isSuccess, isError} = useMutation({
     mutationFn: registerUser
