@@ -1,8 +1,8 @@
 import { useMemo, useState } from "react"
-import { LoginTypes } from "../types/login-types"
+import { LoginTypes } from "../types/userTypes"
 
-export const useForm = (callback: any, initialState:LoginTypes) => {
-  const [userObject, setValueObject] = useState<LoginTypes>(initialState)
+export const useForm = (callback: any) => {
+  const [userObject, setValueObject] = useState<LoginTypes>({email: '', password: ''})
 
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {

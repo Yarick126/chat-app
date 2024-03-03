@@ -1,10 +1,10 @@
 import {  ReactNode, createContext, useState} from "react";
-import { IIsAuth } from "../core/types/IIsAuth";
+import { UseAuthTypes } from "../core/types/userTypes"; 
 import Cookies from "js-cookie";
 import { TOKEN } from "../core/constants/constants";
 
 
-export const AuthContext = createContext<IIsAuth>({isAuth: false, setIsAuth: ()=>{}})
+export const AuthContext = createContext<UseAuthTypes>({isAuth: false, setIsAuth: ()=>{}})
 
 const AuthProvider = ({children}:{children: ReactNode}) => {
   

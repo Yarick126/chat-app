@@ -2,26 +2,15 @@ import {Button, Form} from 'react-bootstrap'
 import { Link, useNavigate } from 'react-router-dom/dist';
 import { useForm } from '../core/hooks/useForm';
 import { FC } from 'react';
-import { useMutation } from '@tanstack/react-query';
-import { loginUser } from '../core/api';
 import Notification from '../components/UI/Notification';
-import { useAuth } from '../core/hooks/useAuth';
+import { useLoginUser } from '../core/hooks/Authoritzation';
 
-const initialState = {
-  email: '',
-  password: ''
-}
 
 const Login :FC = ()=>{
 
-  const {isAuth, setIsAuth} = useAuth()
   const navigate = useNavigate()
-  const {mutate, isSuccess, isError, data} = useMutation({
-    mutationFn: loginUser,
-    mutationKey: ['loginUser']
-  })
-
-  const {onChange, onSubmit, userObject } = useForm(loginUserCallback, initialState)
+  const {mutate, isSuccess, isError,data} = useLoginUser()
+  const {onChange, onSubmit, userObject } = useForm(loginUserCallback)
 
   async function loginUserCallback() {
 
@@ -35,17 +24,6 @@ const Login :FC = ()=>{
     }
     
     await mutate(userObject)
-    
-    if(!data?.data) return 
-    setIsAuth(true)
-    navigate('/chat')
-    
-
-    
-    console.log(data?.data.user);
-    console.log(isAuth);
-    
-    
   }
 
   return (

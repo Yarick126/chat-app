@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
-import { RegisterTypes } from '../core/types/regiter-types';
+import { RegisterTypes } from '../core/types/userTypes';
 import { useMutation } from '@tanstack/react-query';
 import { registerUser } from '../core/api';
 import Notification from '../components/UI/Notification';
@@ -26,7 +26,8 @@ const Registration:FC = () => {
 
 
   const { mutate, isSuccess, isError} = useMutation({
-    mutationFn: registerUser
+    mutationFn: registerUser,
+    mutationKey: ['registerUser']
   })
 
   const onSubmit:SubmitHandler<RegisterTypes> = (data) => {
