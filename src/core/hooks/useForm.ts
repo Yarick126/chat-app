@@ -1,12 +1,10 @@
 import { useMemo, useState } from "react"
 import { LoginTypes } from "../types/userTypes"
 
-export const useForm = (callback: any) => {
+export const useForm = (callback: ()=>{}) => {
   const [userObject, setValueObject] = useState<LoginTypes>({email: '', password: ''})
 
-
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-
     setValueObject(
       { 
         ...userObject, 
@@ -16,7 +14,6 @@ export const useForm = (callback: any) => {
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-
     await callback()
   }
 

@@ -1,6 +1,7 @@
 import { useMutation } from "@tanstack/react-query"
-import { loginUser } from "../api"
+import { loginUser, registerUser } from "../api"
 import { useAuth } from "./useAuth"
+
 
 export const useLoginUser = () => {
 
@@ -9,17 +10,22 @@ export const useLoginUser = () => {
   return useMutation({
     mutationFn: loginUser,
     mutationKey: ['loginUser'],
+
     onSuccess: ()=> {
       setIsAuth(true)
-      console.log(isAuth)},
-    onError: () => {
-      alert('ERROR!!!')
-    }
+      console.log(isAuth)}
+
   })
 }
 
 export const useRegister = () => {
   const {isAuth, setIsAuth} = useAuth()
 
-  
+  return useMutation({
+    mutationFn: registerUser,
+    mutationKey: ['registerUser'],
+    onSuccess: ()=> {
+      setIsAuth(true)
+      console.log(isAuth)}
+  })
 }

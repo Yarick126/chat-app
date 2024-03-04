@@ -3,9 +3,11 @@ import { Button, Form } from 'react-bootstrap';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { RegisterTypes } from '../core/types/userTypes';
-import { useMutation } from '@tanstack/react-query';
-import { registerUser } from '../core/api';
 import Notification from '../components/UI/Notification';
+import { useRegister } from '../core/hooks/AuthorizationHooks';
+import InputFieldForm from '../components/UI/InputFieldForm';
+import { FaArrowLeft } from 'react-icons/fa';
+
 
 const Registration:FC = () => {
 
@@ -25,10 +27,7 @@ const Registration:FC = () => {
     })
 
 
-  const { mutate, isSuccess, isError} = useMutation({
-    mutationFn: registerUser,
-    mutationKey: ['registerUser']
-  })
+  const { mutate, isSuccess, isError} = useRegister()
 
   const onSubmit:SubmitHandler<RegisterTypes> = (data) => {
     
@@ -38,48 +37,31 @@ const Registration:FC = () => {
 
   return (
   <>
-    <h1 className='text-center'><Link to='/' className='text-decoration-none text-dark'>Registration</Link></h1>
+    <h1 className='text-center'><Link to='/' className='text-decoration-none text-dark'>Registration ({<FaArrowLeft size={27}/>}back to Home)</Link></h1>
     {isSuccess && <Notification result='success'/>}
     {isError && <Notification result='danger'/>}
-    <Form className='w-25 position-absolute top-50 start-50 translate-middle text-primary' onSubmit={handleSubmit(onSubmit)}>
-      <Form.Group >
-        <Form.Label htmlFor='firstName'>First Name</Form.Label>
-        <Form.Control id='firstName' {...register('firstName', {required:true, pattern: /^[A-Za-z]+$/i})}></Form.Control>
-        {errors.firstName && <Form.Text className='text-danger'>This field is required!</Form.Text>}
-      </Form.Group>
+    <Form className='w-25 position-absolute top-50 start-50 translate-middle' onSubmit={handleSubmit(onSubmit)}>
 
-      <Form.Group>
-        <Form.Label htmlFor='secondName'>Second Name</Form.Label>
-        <Form.Control id='secondName' {...register('secondName', {required: true, pattern: /^[A-Za-z]+$/i})}></Form.Control>
-        {errors.secondName && <Form.Text className='text-danger'>This field is required!</Form.Text>}
-      </Form.Group>
+      <InputFieldForm name={'firstName'} errorMessage={errors.firstName} 
+      children={<Form.Control id='firstName' {...register('firstName', {required:true, pattern: /^[A-Za-z]+$/i})}></Form.Control>}/>
 
-      <Form.Group className='w-25'>
-        <Form.Label htmlFor='age'>Age</Form.Label>
-        <Form.Control type="number" id='age' {...register('age', {required: true, min: 18, max: 99})}></Form.Control>
-        {errors.age && <Form.Text className='text-danger'>This field is required!</Form.Text>}
-      </Form.Group>
+      <InputFieldForm name='secondName' errorMessage={errors.secondName}
+        children = {<Form.Control id='secondName' {...register('secondName', {required: true, pattern: /^[A-Za-z]+$/i})}></Form.Control>}/>
 
-      <Form.Group>
-        <Form.Label htmlFor='email'>Email</Form.Label>
-        <Form.Control type='email' id='email' {...register('email', {required: true})}></Form.Control>
-        {errors.email && <Form.Text className='text-danger'>This field is required!</Form.Text>}
-      </Form.Group>
+      <InputFieldForm name='age'errorMessage={errors.age}
+        children = {<Form.Control type="number" id='age' {...register('age', {required: true, min: 18, max: 99})}/>}/>
 
-      <Form.Group>
-        <Form.Label htmlFor='password'>Password</Form.Label>
-        <Form.Control type='password' id='password' {...register('password', {required: true, minLength: 5})}></Form.Control>
-        {errors.password && <Form.Text className='text-danger'>This field is required!</Form.Text>}
-      </Form.Group>
+      <InputFieldForm name='email'errorMessage={errors.email}
+        children = {<Form.Control type='email' id='email' autoComplete='username' {...register('email', {required: true})}/>}/>
 
-      <Form.Group>
-        <Form.Label htmlFor='repeatPassword'>Repeat password</Form.Label>
-        <Form.Control type='password' id='repeatPassword' {...register('password', {required: true, minLength: 5})}></Form.Control>
-        {errors.password && <Form.Text className='text-danger'>This field is required!</Form.Text>}
-      </Form.Group>
+      <InputFieldForm name='password'errorMessage={errors.password}
+        children = {<Form.Control type='password' id='password' autoComplete='current-password' {...register('password', {required: true, minLength: 5})}/>}/>
 
-      <Form.Group className='mt-4 d-flex f-row justify-content-around fs-2'>
-        <Button type='submit' className='fs-2'>Sign up</Button> or <Link to='/login' className='text-decoration-none'>Login</Link>
+      <InputFieldForm name='repeatPassword' errorMessage={errors.password}
+        children = {<Form.Control type='password' id='repeatPassword' autoComplete='current-password' {...register('password', {required: true, minLength: 5})}/>}/>
+
+      <Form.Group className='mt-4 d-flex f-row justify-content-around fs-3'>
+        <Button type='submit' className='fs-3'>Sign up</Button> or <Link to='/login' className='text-decoration-none'>Login</Link>
       </Form.Group>
     </Form>
   </>
