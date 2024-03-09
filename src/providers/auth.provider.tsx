@@ -10,9 +10,10 @@ const AuthProvider = ({children}:{children: ReactNode}) => {
   
   const [isAuth, setIsAuth] = useState(!!Cookies.get(TOKEN))
 
-  return <AuthContext.Provider value ={{isAuth, setIsAuth}}>
+  return (
+  <AuthContext.Provider value ={{isAuth, setIsAuth}}>
     {children}
-  </AuthContext.Provider>
+  </AuthContext.Provider>)
 }
 
 export default AuthProvider

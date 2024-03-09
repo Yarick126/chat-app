@@ -1,10 +1,9 @@
 import { FC } from 'react';
+import Header from '../components/UI/Header';
 
 const NotFound:FC = () => {
   return (
-    <div>
-      NotFound
-    </div>
+    <Header text='Not found'/>
   );
 };
 

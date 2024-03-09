@@ -7,6 +7,7 @@ import Notification from '../components/UI/Notification';
 import { useRegister } from '../core/hooks/AuthorizationHooks';
 import InputFieldForm from '../components/UI/InputFieldForm';
 import { FaArrowLeft } from 'react-icons/fa';
+import Header from '../components/UI/Header';
 
 
 const Registration:FC = () => {
@@ -37,10 +38,10 @@ const Registration:FC = () => {
 
   return (
   <>
-    <h1 className='text-center'><Link to='/' className='text-decoration-none text-dark'>Registration ({<FaArrowLeft size={27}/>}back to Home)</Link></h1>
+    <Header text='Registration'/>
     {isSuccess && <Notification result='success'/>}
     {isError && <Notification result='danger'/>}
-    <Form className='w-25 position-absolute top-50 start-50 translate-middle' onSubmit={handleSubmit(onSubmit)}>
+    <Form className='w-25 position-absolute top-50 start-50 translate-middle mt-4' onSubmit={handleSubmit(onSubmit)}>
 
       <InputFieldForm name={'firstName'} errorMessage={errors.firstName} 
       children={<Form.Control id='firstName' {...register('firstName', {required:true, pattern: /^[A-Za-z]+$/i})}></Form.Control>}/>

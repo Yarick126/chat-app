@@ -1,27 +1,27 @@
 import {Button, Form} from 'react-bootstrap'
-import { Link, useNavigate } from 'react-router-dom/dist';
+import { Link } from 'react-router-dom/dist';
 import { useForm } from '../core/hooks/useForm';
 import { FC } from 'react';
 import Notification from '../components/UI/Notification';
-import { FaArrowLeft } from "react-icons/fa";
 import { useLoginUser } from '../core/hooks/AuthorizationHooks';
+import Header from '../components/UI/Header';
+
 
 
 const Login :FC = ()=>{
 
-  const navigate = useNavigate()
-  const {mutate, isSuccess, isError,data} = useLoginUser()
+  const {mutate, isSuccess, isError} = useLoginUser()
   const {onChange, onSubmit, userObject} = useForm(loginUserCallback)
 
-  async function loginUserCallback() {
-    
-    await mutate(userObject)
 
+  async function loginUserCallback() {
+    await mutate(userObject)
   }
 
   return (
   <>
-    <h1 className='text-center'><Link to='/' className='text-decoration-none text-dark'>Login ({<FaArrowLeft size={27}/>}back to Home)</Link></h1>
+    <Header text='Login'/>
+
     {isSuccess && <Notification result='success'/>}
     {isError && <Notification result='danger'/>}
     
